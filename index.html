@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICAI Energy — Ingeniería Eléctrica</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════════════
+   VARIABLES DE MARCA — ICAI ENERGY
+══════════════════════════════════════════ */
+:root {
+  --navy:      #0E2F57;   /* Azul marino principal */
+  --navy2:     #123B6D;   /* Azul marino secundario */
+  --green:     #4FA14F;   /* Verde principal */
+  --green2:    #6DBF6D;   /* Verde claro */
+  --gray:      #5A5A5A;   /* Gris oscuro */
+  --white:     #FFFFFF;
+  --light:     #F4F7FB;   /* Fondo claro secciones */
+  --border:    rgba(14,47,87,0.10);
+}
+
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family:'Barlow', sans-serif;
+  color: var(--gray);
+  background: var(--white);
+  overflow-x: hidden;
+}
+img { max-width:100%; display:block; }
+a  { text-decoration:none; }
+
+/* ══════════════════════════════════════════
+   UTILIDADES
+══════════════════════════════════════════ */
+.container { max-width:1200px; margin:0 auto; padding:0 32px; }
+.tag {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:600; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--green);
+  margin-bottom:12px;
+}
+.tag::before {
+  content:'';
+  display:block;
+  width:24px; height:2px;
+  background:var(--green);
+}
+.section-title {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:clamp(34px,4vw,52px);
+  font-weight:800;
+  text-transform:uppercase;
+  line-height:1.0;
+  color:var(--navy);
+  margin-bottom:14px;
+}
+.section-title em { font-style:normal; color:var(--green); }
+.section-desc {
+  font-size:15px; font-weight:300;
+  color:var(--gray); line-height:1.75;
+  max-width:580px; margin-bottom:48px;
+}
+.btn {
+  display:inline-block;
+  font-family:'Barlow Condensed', sans-serif;
+  font-weight:700; font-size:15px;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:14px 32px; border-radius:4px;
+  transition:all .2s; cursor:pointer; border:none;
+}
+.btn-primary { background:var(--green); color:var(--white); }
+.btn-primary:hover { background:var(--green2); transform:translateY(-2px); }
+.btn-navy   { background:var(--navy); color:var(--white); }
+.btn-navy:hover { background:var(--navy2); transform:translateY(-2px); }
+.btn-outline {
+  background:transparent;
+  color:var(--navy);
+  border:2px solid var(--navy);
+}
+.btn-outline:hover { background:var(--navy); color:var(--white); }
+
+/* ══════════════════════════════════════════
+   ① TOPBAR
+══════════════════════════════════════════ */
+.topbar {
+  background:var(--navy2);
+  padding:8px 0;
+}
+.topbar .container {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:8px;
+}
+.topbar-left {
+  display:flex; gap:24px; flex-wrap:wrap;
+}
+.topbar-item {
+  display:flex; align-items:center; gap:6px;
+  font-size:12px; color:rgba(255,255,255,.75); font-weight:400;
+}
+.topbar-item svg { flex-shrink:0; }
+.topbar-right {
+  display:flex; gap:10px;
+}
+.social-icon {
+  width:28px; height:28px;
+  border-radius:4px;
+  background:rgba(255,255,255,.1);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,.8);
+  font-size:13px;
+  transition:background .2s;
+}
+.social-icon:hover { background:var(--green); color:var(--white); }
+
+/* ══════════════════════════════════════════
+   ② NAVBAR
+══════════════════════════════════════════ */
+nav {
+  position:sticky; top:0; z-index:900;
+  background:var(--white);
+  border-bottom:3px solid var(--green);
+  box-shadow:0 2px 16px rgba(14,47,87,.12);
+}
+.nav-inner {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 32px; max-width:1200px; margin:0 auto; height:72px;
+}
+.nav-logo {
+  display:flex; align-items:center; gap:12px;
+}
+.nav-logo img {
+  height:48px; width:auto;
+}
+/* Fallback si no hay logo img */
+.logo-text {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:28px; font-weight:900;
+  color:var(--navy); letter-spacing:1px;
+}
+.logo-text span { color:var(--green); }
+
+.nav-links {
+  display:flex; gap:4px; list-style:none; align-items:center;
+}
+.nav-links a {
+  font-size:13px; font-weight:600;
+  letter-spacing:.4px; text-transform:uppercase;
+  color:var(--navy); padding:8px 14px;
+  border-radius:4px; transition:all .2s;
+}
+.nav-links a:hover,
+.nav-links a.active { color:var(--green); }
+
+.nav-links a.nav-cta {
+  background:var(--green);
+  color:var(--white);
+  padding:9px 22px;
+  border-radius:4px;
+}
+.nav-links a.nav-cta:hover { background:var(--navy); color:var(--white); }
+
+/* hamburger mobile */
+.nav-toggle {
+  display:none; flex-direction:column; gap:5px;
+  cursor:pointer; padding:4px;
+}
+.nav-toggle span {
+  display:block; width:24px; height:2px;
+  background:var(--navy); border-radius:2px;
+  transition:all .3s;
+}
+
+/* ══════════════════════════════════════════
+   ③ HERO — SECCIÓN 1
+══════════════════════════════════════════ */
+.hero {
+  position:relative;
+  min-height:580px;
+  display:flex; align-items:center;
+  overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:url('FOTO_HERO.jpg') center/cover no-repeat;
+  /* ← REEMPLAZA con tu foto de subestación/trabajadores */
+}
+.hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(14,47,87,.92) 0%,
+    rgba(14,47,87,.80) 50%,
+    rgba(14,47,87,.35) 100%
+  );
+}
+/* placeholder gráfico si no hay foto */
+.hero-bg::after {
+  content:'📸  Carga aquí tu foto principal';
+  position:absolute; right:8%; top:50%;
+  transform:translateY(-50%);
+  font-size:18px; color:rgba(255,255,255,.25);
+  font-family:'Barlow Condensed', sans-serif;
+  letter-spacing:2px;
+  text-align:center;
+}
+
+.hero-content {
+  position:relative; z-index:2;
+  padding:80px 32px; max-width:1200px; margin:0 auto; width:100%;
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; font-weight:600; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--green2);
+  margin-bottom:20px;
+}
+.hero-eyebrow::before {
+  content:''; display:block;
+  width:32px; height:2px; background:var(--green2);
+}
+.hero-title {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:clamp(48px,7vw,86px);
+  font-weight:900; text-transform:uppercase;
+  line-height:.95; letter-spacing:-1px;
+  color:var(--white); margin-bottom:24px;
+}
+.hero-title em { font-style:normal; color:var(--green2); display:block; }
+.hero-sub {
+  font-size:17px; font-weight:300;
+  color:rgba(255,255,255,.75);
+  line-height:1.7; max-width:500px; margin-bottom:40px;
+}
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+
+.hero-stats-bar {
+  position:relative; z-index:2;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(8px);
+  border-top:1px solid rgba(79,161,79,.3);
+}
+.hero-stats-inner {
+  display:flex; max-width:1200px; margin:0 auto;
+}
+.stat-block {
+  flex:1; padding:22px 32px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.stat-block:last-child { border-right:none; }
+.stat-num {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:40px; font-weight:900;
+  color:var(--green2); line-height:1;
+}
+.stat-lbl {
+  font-size:11px; color:rgba(255,255,255,.5);
+  margin-top:4px; letter-spacing:.5px;
+}
+
+/* ══════════════════════════════════════════
+   ④ PESTAÑAS DE SERVICIOS — SECCIÓN 2
+══════════════════════════════════════════ */
+.servicios-section { background:var(--light); padding:80px 0 0; }
+
+.tabs-nav {
+  display:flex; gap:0;
+  border-bottom:3px solid var(--navy);
+  overflow-x:auto;
+}
+.tab-btn {
+  flex-shrink:0;
+  background:none; border:none;
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:15px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase;
+  color:var(--gray); padding:16px 28px;
+  cursor:pointer; position:relative;
+  transition:all .2s; white-space:nowrap;
+  display:flex; align-items:center; gap:8px;
+}
+.tab-btn::after {
+  content:''; position:absolute;
+  bottom:-3px; left:0; right:0; height:3px;
+  background:var(--green);
+  transform:scaleX(0); transition:transform .25s;
+}
+.tab-btn:hover { color:var(--navy); }
+.tab-btn.active { color:var(--navy); }
+.tab-btn.active::after { transform:scaleX(1); }
+.tab-icon { font-size:18px; }
+
+.tab-panels { padding-bottom:80px; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* Panel genérico */
+.panel-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  background:var(--white);
+  border:1px solid var(--border);
+  margin-top:40px;
+}
+.panel-info { padding:52px 48px; }
+.panel-img {
+  position:relative; min-height:380px;
+  background:#D5E3F0 url('FOTO_PANEL.jpg') center/cover;
+  /* ← cambia la foto por sección */
+  display:flex; align-items:flex-end;
+}
+.panel-img-caption {
+  background:var(--navy);
+  color:rgba(255,255,255,.7);
+  font-size:11px; letter-spacing:1.5px;
+  text-transform:uppercase; padding:10px 16px;
+  width:100%;
+}
+/* placeholder */
+.panel-img::before {
+  content:'📸  Tu foto aquí';
+  color:rgba(14,47,87,.25);
+  font-size:16px;
+  font-family:'Barlow Condensed', sans-serif;
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  letter-spacing:2px;
+}
+
+.feature-list { list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+.feature-list li {
+  display:flex; align-items:flex-start; gap:12px;
+  font-size:14px; font-weight:400; color:var(--gray); line-height:1.6;
+}
+.feature-list li::before {
+  content:'';
+  display:block; flex-shrink:0;
+  width:6px; height:6px; margin-top:7px;
+  border-radius:50%; background:var(--green);
+}
+
+.norms-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(14,47,87,.06);
+  border-left:3px solid var(--navy);
+  padding:8px 14px;
+  font-size:12px; font-weight:600; color:var(--navy);
+  letter-spacing:.5px; margin-right:8px; margin-bottom:8px;
+}
+
+/* Cards dentro del panel */
+.sub-cards {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px; margin-top:32px;
+}
+.sub-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-top:3px solid var(--green);
+  padding:24px 20px;
+}
+.sub-card-icon { font-size:26px; margin-bottom:12px; }
+.sub-card h4 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:16px; font-weight:700;
+  text-transform:uppercase; color:var(--navy);
+  margin-bottom:8px; letter-spacing:.3px;
+}
+.sub-card p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+/* Proceso steps */
+.process-steps {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:0; margin-top:32px;
+  border:1px solid var(--border);
+}
+.process-step {
+  padding:32px 28px;
+  border-right:1px solid var(--border);
+  background:var(--white);
+}
+.process-step:last-child { border-right:none; }
+.step-num {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:56px; font-weight:900;
+  color:rgba(14,47,87,.10); line-height:1;
+  margin-bottom:-6px;
+}
+.step-title {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:17px; font-weight:700;
+  text-transform:uppercase; color:var(--green);
+  margin-bottom:10px; letter-spacing:.3px;
+}
+.process-step p { font-size:13px; color:var(--gray); line-height:1.65; }
+
+/* ══════════════════════════════════════════
+   ⑤ POR QUÉ ICAI — SECCIÓN 3
+══════════════════════════════════════════ */
+.porque-section { background:var(--navy); padding:80px 0; }
+
+.porque-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px; align-items:center;
+}
+.porque-text .section-title { color:var(--white); }
+.porque-text .section-title em { color:var(--green2); }
+.porque-text .section-desc { color:rgba(255,255,255,.6); }
+
+.diff-list { list-style:none; display:flex; flex-direction:column; gap:0; }
+.diff-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.diff-item:last-child { border-bottom:none; }
+.diff-num {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:36px; font-weight:900;
+  color:var(--green); line-height:1;
+  flex-shrink:0; width:44px;
+}
+.diff-body h4 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:18px; font-weight:700;
+  text-transform:uppercase; color:var(--white);
+  margin-bottom:4px; letter-spacing:.3px;
+}
+.diff-body p { font-size:13px; color:rgba(255,255,255,.5); line-height:1.6; }
+
+.porque-visual {
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+}
+.stat-card {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  padding:36px 28px; text-align:center;
+  transition:background .2s;
+}
+.stat-card:hover { background:rgba(79,161,79,.08); }
+.stat-card-num {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:52px; font-weight:900;
+  color:var(--green2); line-height:1; margin-bottom:6px;
+}
+.stat-card-lbl {
+  font-size:12px; color:rgba(255,255,255,.45);
+  letter-spacing:.5px; font-weight:400;
+}
+
+/* ══════════════════════════════════════════
+   ⑥ CLIENTES — SECCIÓN 4
+══════════════════════════════════════════ */
+.clientes-section { background:var(--white); padding:80px 0; }
+
+.sectors-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.sector-col {
+  background:var(--white);
+  padding:32px 24px;
+}
+.sector-title {
+  font-size:10px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--navy);
+  padding-bottom:12px;
+  border-bottom:2px solid var(--green);
+  margin-bottom:20px;
+}
+.sector-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.sector-list li {
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; color:var(--gray); font-weight:400;
+}
+.sector-list li::before {
+  content:'';
+  display:block; flex-shrink:0;
+  width:4px; height:4px;
+  border-radius:50%; background:var(--green);
+}
+
+/* Logos strip */
+.logos-strip {
+  display:flex; flex-wrap:wrap; gap:0;
+  background:var(--light);
+  border:1px solid var(--border);
+  margin-top:32px;
+}
+.logo-slot {
+  flex:1; min-width:140px;
+  padding:28px 20px;
+  display:flex; align-items:center; justify-content:center;
+  border-right:1px solid var(--border);
+  font-size:13px; font-weight:600; color:rgba(14,47,87,.3);
+  letter-spacing:1px; text-align:center; text-transform:uppercase;
+}
+.logo-slot:last-child { border-right:none; }
+.logo-slot img { max-height:36px; width:auto; filter:grayscale(100%); opacity:.5; transition:.2s; }
+.logo-slot:hover img { filter:none; opacity:1; }
+
+/* ══════════════════════════════════════════
+   ⑦ ALIANZA CONCESIONARIAS — SECCIÓN 5
+══════════════════════════════════════════ */
+.alianza-section {
+  background:var(--light);
+  padding:80px 0;
+  position:relative; overflow:hidden;
+}
+.alianza-section::before {
+  content:'EV';
+  position:absolute; right:-40px; top:50%;
+  transform:translateY(-50%);
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:300px; font-weight:900;
+  color:rgba(14,47,87,.04);
+  line-height:1;
+  pointer-events:none;
+}
+
+.alianza-inner {
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;
+}
+.alianza-left .section-desc { margin-bottom:32px; }
+
+.flow-steps { display:flex; flex-direction:column; gap:0; }
+.flow-step {
+  display:flex; gap:20px; align-items:flex-start;
+  padding:20px 0;
+  border-bottom:1px solid var(--border);
+}
+.flow-step:last-child { border-bottom:none; }
+.flow-circle {
+  width:40px; height:40px; flex-shrink:0;
+  border-radius:50%; background:var(--navy);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:18px; font-weight:800; color:var(--white);
+}
+.flow-step h4 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:16px; font-weight:700;
+  text-transform:uppercase; color:var(--navy);
+  margin-bottom:4px; letter-spacing:.3px;
+}
+.flow-step p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+.alianza-right {
+  background:var(--navy);
+  padding:40px 36px;
+}
+.alianza-right .section-title { color:var(--white); font-size:32px; margin-bottom:8px; }
+.alianza-right .section-title em { color:var(--green2); }
+.alianza-right-desc {
+  font-size:14px; color:rgba(255,255,255,.55);
+  line-height:1.7; margin-bottom:32px;
+}
+.benefit-list { list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:36px; }
+.benefit-list li {
+  display:flex; align-items:center; gap:12px;
+  font-size:14px; color:rgba(255,255,255,.8); line-height:1.5;
+}
+.benefit-list li::before {
+  content:'✓';
+  display:flex; align-items:center; justify-content:center;
+  width:22px; height:22px; flex-shrink:0;
+  border-radius:50%; background:var(--green);
+  font-size:11px; font-weight:800; color:var(--white);
+}
+
+/* ══════════════════════════════════════════
+   ⑧ CONTACTO — SECCIÓN 6
+══════════════════════════════════════════ */
+.contacto-section { background:var(--white); padding:80px 0; }
+
+.contacto-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;
+}
+.contact-details { margin-top:32px; display:flex; flex-direction:column; gap:0; }
+.contact-row {
+  display:flex; align-items:center; gap:16px;
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
+  background:var(--light);
+}
+.contact-row:first-child { border-top:1px solid var(--border); }
+.contact-icon {
+  width:40px; height:40px;
+  background:var(--navy); border-radius:4px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; flex-shrink:0;
+}
+.contact-row-text strong {
+  display:block; font-size:14px; font-weight:600;
+  color:var(--navy); margin-bottom:2px;
+}
+.contact-row-text span { font-size:13px; color:var(--gray); }
+
+/* Formulario */
+.form-wrap { background:var(--light); padding:40px 36px; border:1px solid var(--border); }
+.form-title {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:22px; font-weight:700;
+  text-transform:uppercase; color:var(--navy);
+  margin-bottom:24px; letter-spacing:.5px;
+}
+.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.field { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.field label {
+  font-size:11px; font-weight:600; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--navy);
+}
+.field input,
+.field select,
+.field textarea {
+  background:var(--white);
+  border:1px solid #C8D6E5;
+  border-radius:3px; padding:12px 14px;
+  font-family:'Barlow', sans-serif;
+  font-size:14px; font-weight:300; color:var(--gray);
+  transition:border-color .2s; outline:none; width:100%;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color:var(--navy); }
+.field select option { background:var(--white); }
+.field textarea { resize:vertical; min-height:100px; }
+.btn-submit {
+  width:100%; background:var(--green); color:var(--white);
+  border:none; border-radius:3px; padding:16px;
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:17px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; cursor:pointer; transition:all .2s;
+}
+.btn-submit:hover { background:var(--navy); transform:translateY(-1px); }
+
+/* ══════════════════════════════════════════
+   ⑨ FOOTER
+══════════════════════════════════════════ */
+.footer-top {
+  background:var(--navy2); padding:60px 0 40px;
+}
+.footer-grid {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+}
+.footer-brand { }
+.footer-logo-txt {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:30px; font-weight:900;
+  color:var(--white); letter-spacing:1px;
+  margin-bottom:14px;
+}
+.footer-logo-txt span { color:var(--green2); }
+.footer-tagline {
+  font-size:12px; color:rgba(255,255,255,.4);
+  letter-spacing:1.5px; text-transform:uppercase;
+  margin-bottom:20px;
+}
+.footer-brand p {
+  font-size:13px; color:rgba(255,255,255,.5);
+  line-height:1.7; max-width:280px;
+}
+.footer-col h5 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:14px; font-weight:700;
+  text-transform:uppercase; letter-spacing:1px;
+  color:var(--white); margin-bottom:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(79,161,79,.3);
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.footer-col ul li a {
+  font-size:13px; color:rgba(255,255,255,.45);
+  transition:color .2s; font-weight:300;
+}
+.footer-col ul li a:hover { color:var(--green2); }
+
+.footer-bottom {
+  background:var(--navy); padding:16px 0;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.footer-bottom-inner {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:10px;
+}
+.footer-copy { font-size:12px; color:rgba(255,255,255,.3); }
+.footer-socials { display:flex; gap:8px; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width:980px) {
+  .nav-links { display:none; }
+  .nav-links.open {
+    display:flex; flex-direction:column;
+    position:absolute; top:72px; left:0; right:0;
+    background:var(--white);
+    border-bottom:3px solid var(--green);
+    padding:20px 32px; gap:4px;
+    box-shadow:0 8px 24px rgba(14,47,87,.15);
+  }
+  .nav-toggle { display:flex; }
+  .panel-grid { grid-template-columns:1fr; }
+  .panel-img { min-height:220px; }
+  .sub-cards { grid-template-columns:1fr 1fr; }
+  .process-steps { grid-template-columns:1fr 1fr; }
+  .porque-grid { grid-template-columns:1fr; }
+  .porque-visual { grid-template-columns:1fr 1fr; }
+  .sectors-grid { grid-template-columns:1fr 1fr; }
+  .alianza-inner { grid-template-columns:1fr; gap:40px; }
+  .contacto-grid { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr 1fr; }
+  .hero-stats-inner { flex-wrap:wrap; }
+  .stat-block { min-width:50%; }
+}
+@media (max-width:600px) {
+  .container { padding:0 20px; }
+  .hero-content { padding:70px 20px; }
+  .sub-cards { grid-template-columns:1fr; }
+  .process-steps { grid-template-columns:1fr; }
+  .sectors-grid { grid-template-columns:1fr; }
+  .porque-visual { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr; }
+  .form-row-2 { grid-template-columns:1fr; }
+  .logos-strip { flex-direction:column; }
+}
+
+/* ══ ANIMACIONES ══ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero-eyebrow { animation:fadeUp .6s ease both; }
+.hero-title   { animation:fadeUp .6s .1s ease both; }
+.hero-sub     { animation:fadeUp .6s .2s ease both; }
+.hero-actions { animation:fadeUp .6s .3s ease both; }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     ① TOPBAR
+══════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <div class="topbar-item">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        55 2695 3229 &nbsp;|&nbsp; 55 1579 8911
+      </div>
+      <div class="topbar-item">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        contacto@icaienergy.com.mx
+      </div>
+      <div class="topbar-item">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+        Lun–Vie 8:00–18:00
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="https://facebook.com/icaienergy" class="social-icon" target="_blank">f</a>
+      <a href="https://instagram.com/icaienergy" class="social-icon" target="_blank">in</a>
+      <a href="https://wa.me/5215615798911" class="social-icon" target="_blank">W</a>
+      <a href="https://linkedin.com/company/icaienergy" class="social-icon" target="_blank">Li</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ② NAVBAR
+══════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <!-- Reemplaza con tu imagen de logo -->
+      <!-- <img src="LOGO_ICAI.png" alt="ICAI Energy"> -->
+      <div class="logo-text">ICAI<span>ENERGY</span></div>
+    </div>
+    <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#porque">Nosotros</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#alianza">Alianza EV</a></li>
+      <li><a href="#contacto" class="nav-cta">Cotización</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     ③ HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Empresa 100% Mexicana · Desde 2016</div>
+    <h1 class="hero-title">
+      Ingeniería<br>Eléctrica de
+      <em>Alto Impacto</em>
+    </h1>
+    <p class="hero-sub">
+      Especialistas en eficiencia energética, instalaciones eléctricas de baja y media tensión, cargadores EV y proyectos ejecutivos. Cumplimiento NOM-001-SEDE en cada proyecto.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn btn-primary">Cotización Sin Costo</a>
+      <a href="#servicios" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.4);">Ver Servicios</a>
+    </div>
+  </div>
+
+  <div class="hero-stats-bar">
+    <div class="hero-stats-inner">
+      <div class="stat-block">
+        <div class="stat-num">+8</div>
+        <div class="stat-lbl">Años de experiencia</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">+45</div>
+        <div class="stat-lbl">Proyectos EV instalados</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">7/día</div>
+        <div class="stat-lbl">Capacidad de instalación</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">48h</div>
+        <div class="stat-lbl">Respuesta visita técnica</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">Cobertura nacional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ④ SERVICIOS CON PESTAÑAS
+══════════════════════════════════════════ -->
+<section class="servicios-section" id="servicios">
+  <div class="container">
+    <div class="tag">Lo que hacemos</div>
+    <h2 class="section-title">Nuestros <em>Servicios</em></h2>
+    <p class="section-desc">Soluciones eléctricas completas con normativa vigente, equipo propio y sin subcontratos. Cuatro áreas de especialización.</p>
+  </div>
+
+  <!-- Pestañas -->
+  <div class="container">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="showTab('ev')" id="tab-ev">
+        <span class="tab-icon">⚡</span> Cargadores EV
+      </button>
+      <button class="tab-btn" onclick="showTab('mtto')" id="tab-mtto">
+        <span class="tab-icon">🔧</span> Mantenimiento
+      </button>
+      <button class="tab-btn" onclick="showTab('inst')" id="tab-inst">
+        <span class="tab-icon">🏗️</span> Instalaciones
+      </button>
+      <button class="tab-btn" onclick="showTab('sfv')" id="tab-sfv">
+        <span class="tab-icon">☀️</span> Solar / Fotovoltaico
+      </button>
+    </div>
+  </div>
+
+  <div class="container tab-panels">
+
+    <!-- PESTAÑA 1 — EV -->
+    <div class="tab-panel active" id="panel-ev">
+      <div class="panel-grid">
+        <div class="panel-info">
+          <div class="tag">Movilidad Eléctrica</div>
+          <h3 class="section-title" style="font-size:36px;">Instalación de<br><em>Cargadores EV</em></h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px;">
+            Proveedor oficial de instalación para concesionarias y usuarios finales. Gestionamos todo: visita técnica, proyecto ejecutivo, instalación y certificación NOM.
+          </p>
+          <ul class="feature-list">
+            <li>Level 2 (7.2–22 kW) y DC Fast Charger para BYD, KIA, Hyundai, Audi, BMW, Polestar y más</li>
+            <li>Circuito dedicado 240V monofásico o trifásico según necesidad</li>
+            <li>Proyecto ejecutivo con memoria de cálculo y diagrama unifilar</li>
+            <li>Tramitación ante UVIE/UIIE sin burocracia para la concesionaria</li>
+            <li>Soporte post-instalación incluido · Visita técnica sin costo</li>
+          </ul>
+          <div style="margin-bottom:28px;">
+            <span class="norms-badge">NOM-001-SEDE</span>
+            <span class="norms-badge">UVIE / UIIE</span>
+            <span class="norms-badge">Nivel 2 &amp; DCFC</span>
+          </div>
+          <a href="#alianza" class="btn btn-primary">Ver Propuesta Alianza</a>
+        </div>
+        <div class="panel-img" style="background-color:#D5E3F0;">
+          <!-- <img src="FOTO_EV.jpg" alt="Instalación de cargador EV"> -->
+          <div class="panel-img-caption">Instalación cargador Nivel 2 · ICAI Energy</div>
+        </div>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Visita Técnica</div>
+          <p>Evaluación del tablero eléctrico, capacidad instalada y ruta de canalización. Sin costo para la concesionaria.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Proyecto Ejecutivo</div>
+          <p>Memoria de cálculo, diagrama unifilar y selección del cargador compatible con el vehículo del cliente.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Instalación</div>
+          <p>Circuito dedicado 240V. Cargadores Nivel 2 (7.2–22 kW) o DC Fast Charger según necesidad.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Puesta en Marcha</div>
+          <p>Pruebas de funcionamiento, entrega de garantía y documentación técnica completa al cliente final.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">05</div>
+          <div class="step-title">Certificación NOM</div>
+          <p>Tramitación ante UVIE/UIIE cuando se requiera. Sin burocracia para la concesionaria.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">06</div>
+          <div class="step-title">Soporte Continuo</div>
+          <p>Línea de atención post-instalación para todos los clientes referidos por la concesionaria aliada.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 2 — MANTENIMIENTO -->
+    <div class="tab-panel" id="panel-mtto">
+      <div class="panel-grid">
+        <div class="panel-info">
+          <div class="tag">Mantenimiento Eléctrico</div>
+          <h3 class="section-title" style="font-size:36px;">Preventivo y<br><em>Correctivo</em></h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px;">
+            Diagnóstico, intervención y puesta a punto de todos los equipos del sistema eléctrico. Reducimos paros no planificados y extendemos la vida útil de tu infraestructura.
+          </p>
+          <ul class="feature-list">
+            <li>Mantenimiento a subestaciones eléctricas: limpieza, reapriete, pruebas eléctricas</li>
+            <li>Mantenimiento a transformadores: análisis y filtrado de aceite dieléctrico</li>
+            <li>Plantas de emergencia: inspección, carga controlada y arranque en frío</li>
+            <li>Banco de capacitores, UPS y PLCs industriales</li>
+            <li>Estudio termográfico: detección de puntos calientes y conexiones flojas</li>
+          </ul>
+          <div style="margin-bottom:28px;">
+            <span class="norms-badge">NOM-001-SEDE</span>
+            <span class="norms-badge">UVIE</span>
+            <span class="norms-badge">Termografía</span>
+          </div>
+          <a href="#contacto" class="btn btn-primary">Solicitar Mantenimiento</a>
+        </div>
+        <div class="panel-img" style="background-color:#C8D6E5;">
+          <!-- <img src="FOTO_MTTO.jpg" alt="Mantenimiento subestación"> -->
+          <div class="panel-img-caption">Mantenimiento preventivo subestación · ICAI Energy</div>
+        </div>
+      </div>
+
+      <div class="sub-cards">
+        <div class="sub-card">
+          <div class="sub-card-icon">🏭</div>
+          <h4>Subestaciones</h4>
+          <p>Limpieza, reapriete, pruebas de aislamiento, relación de transformación y resistencia óhmica.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🔌</div>
+          <h4>Transformadores</h4>
+          <p>Limpieza con dieléctricos, análisis de aceite, prueba bajo carga y generación de diagrama unifilar.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🔋</div>
+          <h4>Plantas de Emergencia</h4>
+          <p>Revisión de motor, generador, combustible, sistema de enfriamiento y prueba de carga real.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">📡</div>
+          <h4>Banco de Capacitores</h4>
+          <p>Verificación de capacitancia, pruebas de factor de potencia y generación de diagrama unifilar.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🌡️</div>
+          <h4>Estudio Termográfico</h4>
+          <p>Inspección con cámara térmica para detectar sobrecalentamientos y conexiones en riesgo de falla.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🌍</div>
+          <h4>Sistema de Tierras</h4>
+          <p>Mantenimiento, corrección y medición de resistencia. Aprobado por UVIE y laboratorio certificado.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 3 — INSTALACIONES -->
+    <div class="tab-panel" id="panel-inst">
+      <div class="panel-grid">
+        <div class="panel-info">
+          <div class="tag">Instalaciones Eléctricas</div>
+          <h3 class="section-title" style="font-size:36px;">Baja y<br><em>Media Tensión</em></h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px;">
+            Diseño e instalación completa de infraestructura eléctrica industrial, comercial y hotelera. Cumplimiento NOM-001-SEDE en todos los proyectos con certificación UVIE.
+          </p>
+          <ul class="feature-list">
+            <li>Instalación de subestaciones eléctricas y transformadores de alta capacidad</li>
+            <li>Tableros de distribución, MasterPact y sistemas de protección</li>
+            <li>Aumento de carga ante CFE hasta 1,080 kW — gestión completa</li>
+            <li>Instalación de cableado, charolas, tubería y canalizaciones</li>
+            <li>Proyectos ejecutivos: memorias de cálculo y diagramas unifilares</li>
+          </ul>
+          <div style="margin-bottom:28px;">
+            <span class="norms-badge">NOM-001-SEDE</span>
+            <span class="norms-badge">NOM-022-STPS</span>
+            <span class="norms-badge">Código de Red</span>
+            <span class="norms-badge">UVIE / UIIE</span>
+          </div>
+          <a href="#contacto" class="btn btn-primary">Solicitar Proyecto</a>
+        </div>
+        <div class="panel-img" style="background-color:#BFD0E0;">
+          <!-- <img src="FOTO_INST.jpg" alt="Instalaciones eléctricas"> -->
+          <div class="panel-img-caption">Instalación media tensión · ICAI Energy</div>
+        </div>
+      </div>
+
+      <div class="sub-cards">
+        <div class="sub-card">
+          <div class="sub-card-icon">⚡</div>
+          <h4>Subestaciones</h4>
+          <p>Diseño, montaje de acometida MT, instalación de transformador y tablero auto-soportado.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">📐</div>
+          <h4>Proyectos Ejecutivos</h4>
+          <p>Diagramas unifilares, memoria de cálculo, levantamiento físico eléctrico y cuadros de cargas.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">📋</div>
+          <h4>Código de Red</h4>
+          <p>Análisis de cortocircuito, flujos de carga, calidad de energía y gestión ante CFE/CRE.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🏗️</div>
+          <h4>Obra Civil</h4>
+          <p>Cuartos eléctricos, cimentaciones, registros, zanjas y canalizaciones hidráulicas.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">💡</div>
+          <h4>Iluminación LED</h4>
+          <p>Diseño de sistemas de iluminación eficiente con tecnología LED bajo normativa ENER.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">📦</div>
+          <h4>Suministro Material</h4>
+          <p>Cables, interruptores, tableros, luminarias y equipo de control con especificaciones técnicas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 4 — SOLAR / FOTOVOLTAICO -->
+    <div class="tab-panel" id="panel-sfv">
+      <div class="panel-grid">
+        <div class="panel-info">
+          <div class="tag">Energías Renovables</div>
+          <h3 class="section-title" style="font-size:36px;">Solar<br><em>Fotovoltaico</em></h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:24px;">
+            Reduce tu factura eléctrica con energía solar. Analizamos tu consumo, diseñamos el sistema óptimo y gestionamos la instalación completa con retorno de inversión garantizado.
+          </p>
+          <ul class="feature-list">
+            <li>Análisis de consumo energético y cálculo de potencial solar</li>
+            <li>Identificación de áreas viables e irradiación en sitio</li>
+            <li>Diseño del sistema: paneles, inversores, monitoreo en tiempo real</li>
+            <li>Calentadores solares térmicos: instalación y adecuaciones a calderas</li>
+            <li>Cumplimiento NOM-013-ENER y lineamientos FONDESO</li>
+          </ul>
+          <div style="margin-bottom:28px;">
+            <span class="norms-badge">NOM-001-SEDE</span>
+            <span class="norms-badge">NOM-013-ENER</span>
+            <span class="norms-badge">ISO 50001</span>
+          </div>
+          <a href="#contacto" class="btn btn-primary">Calcular Ahorro</a>
+        </div>
+        <div class="panel-img" style="background-color:#C4D9C4;">
+          <!-- <img src="FOTO_SOLAR.jpg" alt="Sistema fotovoltaico"> -->
+          <div class="panel-img-caption">Sistema fotovoltaico · ICAI Energy</div>
+        </div>
+      </div>
+
+      <div class="sub-cards">
+        <div class="sub-card">
+          <div class="sub-card-icon">☀️</div>
+          <h4>Anteproyecto Solar</h4>
+          <p>Evaluación del potencial solar, análisis de consumo y propuesta preliminar de ahorro energético.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🔆</div>
+          <h4>Instalación FV</h4>
+          <p>Diseño, suministro e instalación del sistema fotovoltaico con monitoreo de rendimiento en tiempo real.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🌡️</div>
+          <h4>Calentadores Solares</h4>
+          <p>Sistema solar térmico, adecuación de calderas y verificación de sellado sin fugas incluida.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">📊</div>
+          <h4>Eficiencia Energética</h4>
+          <p>Diagnóstico integral, detección de oportunidades y plan de monitoreo para medir el impacto.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">🏙️</div>
+          <h4>Ciudad Solar</h4>
+          <p>Proyectos de gran escala con paneles distribuidos, monitoreo centralizado y evaluación de rendimiento.</p>
+        </div>
+        <div class="sub-card">
+          <div class="sub-card-icon">📋</div>
+          <h4>ROI Garantizado</h4>
+          <p>Análisis de retorno de inversión, proyección de ahorros y estrategias de eficiencia bajo NOM-007-ENER.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-panels -->
+</section>
+
+<!-- ══════════════════════════════════════════
+     ⑤ POR QUÉ ICAI
+══════════════════════════════════════════ -->
+<section class="porque-section" id="porque">
+  <div class="container">
+    <div class="porque-grid">
+      <div class="porque-text">
+        <div class="tag" style="color:var(--green2);">¿Por qué elegirnos?</div>
+        <h2 class="section-title" style="color:var(--white);">Diferencia <em>ICAI</em></h2>
+        <p class="section-desc">Más de 8 años ejecutando proyectos eléctricos de alto impacto para las empresas más exigentes de México.</p>
+
+        <ul class="diff-list">
+          <li class="diff-item">
+            <div class="diff-num">01</div>
+            <div class="diff-body">
+              <h4>Equipo propio, sin subcontratos</h4>
+              <p>Mayor control de calidad, tiempos y costos. Todo nuestro personal técnico está en nómina directa.</p>
+            </div>
+          </li>
+          <li class="diff-item">
+            <div class="diff-num">02</div>
+            <div class="diff-body">
+              <h4>Respuesta en menos de 48 horas</h4>
+              <p>Visita técnica sin costo en cualquier ciudad del país. Seguimiento directo con el cliente.</p>
+            </div>
+          </li>
+          <li class="diff-item">
+            <div class="diff-num">03</div>
+            <div class="diff-body">
+              <h4>Gestión completa del proyecto</h4>
+              <p>Diseño, instalación, certificación NOM y trámites ante CFE/UVIE — un solo interlocutor.</p>
+            </div>
+          </li>
+          <li class="diff-item">
+            <div class="diff-num">04</div>
+            <div class="diff-body">
+              <h4>Experiencia comprobada</h4>
+              <p>Sigma, FEMSA, SEDENA, Palacio de Hierro y más de 50 organizaciones en nuestro portafolio.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="porque-visual">
+        <div class="stat-card">
+          <div class="stat-card-num">+8</div>
+          <div class="stat-card-lbl">Años de experiencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">+45</div>
+          <div class="stat-card-lbl">Proyectos EV</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">50+</div>
+          <div class="stat-card-lbl">Clientes activos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-num">100%</div>
+          <div class="stat-card-lbl">Cobertura nacional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ⑥ CLIENTES
+══════════════════════════════════════════ -->
+<section class="clientes-section" id="clientes">
+  <div class="container">
+    <div class="tag">Experiencia comprobada</div>
+    <h2 class="section-title">Clientes que <em>confían</em> en nosotros</h2>
+    <p class="section-desc">Más de 50 organizaciones líderes en México nos eligen por nuestra calidad técnica y cumplimiento normativo.</p>
+
+    <div class="sectors-grid">
+      <div class="sector-col">
+        <div class="sector-title">Hotelero &amp; Retail</div>
+        <ul class="sector-list">
+          <li>Grupo Posadas</li>
+          <li>Fiesta Americana</li>
+          <li>Grupo Accor</li>
+          <li>Palacio de Hierro</li>
+          <li>Plaza Carso</li>
+          <li>DoubleTree by Hilton</li>
+          <li>Hotel Emporio</li>
+          <li>Price Shoes</li>
+        </ul>
+      </div>
+      <div class="sector-col">
+        <div class="sector-title">Industrial &amp; Consumo</div>
+        <ul class="sector-list">
+          <li>Sigma Alimentos</li>
+          <li>Coca-Cola FEMSA</li>
+          <li>PepsiCo</li>
+          <li>Bio Pappel</li>
+          <li>Estafeta</li>
+          <li>Bostik México</li>
+          <li>Alen del Norte</li>
+          <li>Chedraui</li>
+        </ul>
+      </div>
+      <div class="sector-col">
+        <div class="sector-title">Gobierno &amp; Energía</div>
+        <ul class="sector-list">
+          <li>SEDENA</li>
+          <li>CFE</li>
+          <li>Gobierno CDMX</li>
+          <li>Tecnológico Nacional MX</li>
+          <li>FONDESO</li>
+          <li>GNC Hidrocarburos</li>
+          <li>Termigas</li>
+        </ul>
+      </div>
+      <div class="sector-col">
+        <div class="sector-title">Farmacéutico &amp; Otros</div>
+        <ul class="sector-list">
+          <li>Pisa Farmacéutica</li>
+          <li>Ferring Pharma</li>
+          <li>J&amp;A Pharmaceuticals</li>
+          <li>Canifarma</li>
+          <li>Alvartis Pharma</li>
+          <li>Sulzer</li>
+          <li>Tenazit</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Logos strip — reemplaza con tus logos reales -->
+    <div class="logos-strip">
+      <div class="logo-slot">Sigma</div>
+      <div class="logo-slot">FEMSA</div>
+      <div class="logo-slot">SEDENA</div>
+      <div class="logo-slot">Posadas</div>
+      <div class="logo-slot">PepsiCo</div>
+      <div class="logo-slot">CFE</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ⑦ ALIANZA CONCESIONARIAS
+══════════════════════════════════════════ -->
+<section class="alianza-section" id="alianza">
+  <div class="container">
+    <div class="alianza-inner">
+      <div class="alianza-left">
+        <div class="tag">Para concesionarias</div>
+        <h2 class="section-title">La Alianza que<br><em>Cierra la Venta</em></h2>
+        <p class="section-desc">Cada EV vendido genera una necesidad inmediata de instalación. Sé la concesionaria que ofrece la solución completa al cliente.</p>
+
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-circle">1</div>
+            <div>
+              <h4>Cliente compra EV</h4>
+              <p>El cliente adquiere su vehículo eléctrico en su concesionaria aliada.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-circle">2</div>
+            <div>
+              <h4>Concesionaria refiere</h4>
+              <p>El asesor nos contacta por WhatsApp. El resto lo manejamos nosotros.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-circle">3</div>
+            <div>
+              <h4>Visita técnica en 48h</h4>
+              <p>ICAI evalúa el domicilio sin costo para la concesionaria ni el cliente.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-circle">4</div>
+            <div>
+              <h4>Instalación profesional</h4>
+              <p>Ejecución con equipo propio certificado. Sin subcontratos.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-circle" style="background:var(--green);">5</div>
+            <div>
+              <h4>Entrega completa</h4>
+              <p>Cargador funcionando, garantía y documentación. Cliente satisfecho.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alianza-right">
+        <div class="tag" style="color:var(--green2);">Propuesta de alianza</div>
+        <h3 class="section-title" style="color:var(--white);font-size:32px;">Lo que <em>gana</em><br>la concesionaria</h3>
+        <p class="alianza-right-desc">Conviértete en proveedor oficial de instalación EV. Nosotros gestionamos todo el proceso técnico.</p>
+
+        <ul class="benefit-list">
+          <li>Diferenciador frente a la competencia — el cargador como parte del paquete de venta</li>
+          <li>Cliente más satisfecho = mayor probabilidad de recompra y recomendación</li>
+          <li>Sin carga operativa para tu equipo — ICAI gestiona todo directo con el cliente</li>
+          <li>Reporte mensual de instalaciones para seguimiento y control</li>
+          <li>Capacitación gratuita a tu equipo de ventas sobre el proceso EV</li>
+        </ul>
+
+        <a href="#contacto" class="btn btn-primary" style="width:100%;text-align:center;display:block;">
+          Solicitar Acuerdo de Alianza
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ⑧ CONTACTO
+══════════════════════════════════════════ -->
+<section class="contacto-section" id="contacto">
+  <div class="container">
+    <div class="tag">Hablemos</div>
+    <h2 class="section-title">Cotización <em>Sin Costo</em></h2>
+    <p class="section-desc">Respondemos en menos de 24 horas hábiles. Evaluación técnica sin compromiso.</p>
+
+    <div class="contacto-grid">
+      <div>
+        <div class="contact-details">
+          <div class="contact-row">
+            <div class="contact-icon">📱</div>
+            <div class="contact-row-text">
+              <strong>Ing. Rafael de Jesús Cova Titla</strong>
+              <span>Director de Desarrollo de Negocio</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div class="contact-row-text">
+              <strong>Teléfonos</strong>
+              <span>55 2695 3229 &nbsp;|&nbsp; 55 1579 8911</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-row-text">
+              <strong>Correo</strong>
+              <span>contacto@icaienergy.com.mx</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">🌐</div>
+            <div class="contact-row-text">
+              <strong>Sitio Web</strong>
+              <span>icaienergy.com.mx</span>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div class="contact-row-text">
+              <strong>Cobertura</strong>
+              <span>Ciudad de México y toda la República Mexicana</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mapa placeholder -->
+        <div style="margin-top:24px;height:200px;background:var(--light);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:13px;color:rgba(14,47,87,.3);letter-spacing:1.5px;text-transform:uppercase;">
+            📍 Inserta aquí tu Google Maps embed
+          </span>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <div class="form-title">Solicita tu cotización</div>
+        <form onsubmit="return false;">
+          <div class="form-row-2">
+            <div class="field">
+              <label>Nombre</label>
+              <input type="text" placeholder="Tu nombre completo">
+            </div>
+            <div class="field">
+              <label>Empresa</label>
+              <input type="text" placeholder="Nombre de la empresa">
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="field">
+              <label>Teléfono</label>
+              <input type="tel" placeholder="55 0000 0000">
+            </div>
+            <div class="field">
+              <label>Correo</label>
+              <input type="email" placeholder="correo@empresa.com">
+            </div>
+          </div>
+          <div class="field">
+            <label>Servicio de interés</label>
+            <select>
+              <option value="">Selecciona un servicio…</option>
+              <option>⚡ Instalación de cargador EV</option>
+              <option>🔧 Mantenimiento de subestación</option>
+              <option>🏗️ Instalación eléctrica (BT/MT)</option>
+              <option>☀️ Sistema fotovoltaico / Solar</option>
+              <option>📋 Proyecto ejecutivo / Diagrama unifilar</option>
+              <option>📁 Gestoría ante CFE / UVIE</option>
+              <option>🤝 Alianza concesionaria EV</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Mensaje</label>
+            <textarea placeholder="Describe tu proyecto o necesidad…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar Solicitud →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ⑨ FOOTER
+══════════════════════════════════════════ -->
+<div class="footer-top">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-txt">ICAI<span>ENERGY</span></div>
+        <div class="footer-tagline">Ingeniería · Control · Automatización</div>
+        <p>Empresa 100% mexicana especializada en ingeniería eléctrica, eficiencia energética y movilidad eléctrica. Proyectos integrales con normativa vigente.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Servicios</h5>
+        <ul>
+          <li><a href="#servicios">Cargadores EV</a></li>
+          <li><a href="#servicios">Mantenimiento</a></li>
+          <li><a href="#servicios">Instalaciones</a></li>
+          <li><a href="#servicios">Solar / FV</a></li>
+          <li><a href="#servicios">Eficiencia Energética</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#porque">¿Por qué ICAI?</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+          <li><a href="#alianza">Alianza EV</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="tel:5526953229">55 2695 3229</a></li>
+          <li><a href="tel:5515798911">55 1579 8911</a></li>
+          <li><a href="mailto:contacto@icaienergy.com.mx">contacto@icaienergy.com.mx</a></li>
+          <li><a href="https://wa.me/5215615798911">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">
+  <div class="container">
+    <div class="footer-bottom-inner">
+      <div class="footer-copy">© 2025 ICAI Energy · Todos los derechos reservados</div>
+      <div class="footer-copy">NOM-001-SEDE · UVIE/UIIE · Empresa 100% Mexicana</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+  /* Pestañas */
+  function showTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  /* Menú móvil */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  /* Cerrar menú al hacer click en link */
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  /* Active nav link por scroll */
+  const sections = document.querySelectorAll('section[id], .clientes-section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 90) cur = s.id;
+    });
+    links.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+    });
+  });
+
+  /* Animación scroll */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.sub-card, .stat-card, .flow-step, .sector-col, .diff-item, .process-step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
